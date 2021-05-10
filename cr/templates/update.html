@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<center>
+<div class="col-sm-6">
+    <!-- <h1>Add CR record</h1> -->
+    <br/><br/>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit", value="Update" class="btn btn-secondary">
+    </form>
+</div>
+</center>
+{% endblock content %}
+    

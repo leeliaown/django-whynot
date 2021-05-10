@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<center>
+<div class="col-sm-6">
+    <!-- <h1>Add CR record</h1> -->
+    <p>Are you sure want to delete "{{ item }}"?</p>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <a href="{% url 'home' %}">Cancel</a>
+        <input type="submit", value="Confirm" class="btn btn-secondary">
+    </form>
+</div>
+</center>
+{% endblock content %}
+    

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>
+
+    <small class="text-muted center">{{ user.name }}</small><br/><br/>
+    
+    {% for key, value in att_p.items %}
+    <small class="p-3 mb-2 bg-success text-white">出席點數 : {{ value }}</small>
+    {% endfor %}
+      
+    
+    {% for key, value in result_p.items %}
+    <small class="p-3 mb-2 bg-warning text-dark">作業點數 : {{ value }}</small>
+    {% endfor %}
+      
+    <!-- <button class="btn btn-primary" type="submit">Search</button> -->
+    </form>
+    <hr/>
+</h1>
+<table class="table table-sm table-hover">
+  
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Project Name</th>
+        <th scope="col">Project Code</th>
+        <th scope="col">CR description</th>
+        <th scope="col">Attend. Point</th>
+        <th scope="col">Result Point</th>
+        <th scope="col">PM</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+        {% for project in user.task_set.all %}
+
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        
+
+            <td>{{ project.cr_date|date:"Y-m-d" }}</td>
+            <td>{{ project.project_name }}</td>
+            <td>{{ project.cr_project_code }}</td>
+            <td>{{ project.cr_description }}</td>
+            <td>{{ project.attendance_point }}</td>
+            <td>{{ project.result_point }}</td>
+            <td>{{ project.pm.username }}</td>
+            {% if current_user %}
+              <td><a class="btn btn-sm btn-info" href="{% url 'update-cr' user.id project.id %}">Update</a></td>
+              <td><a class="btn btn-sm btn-danger" href="{% url 'delete-cr' user.id project.id %}">Remove</a></td>
+            {% endif %}
+            
+        {% endfor %}
+      </tr>
+    </tbody>
+
+  </table>
+{% endblock content %}
+    
+

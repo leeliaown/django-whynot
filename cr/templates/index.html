@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% for eng in user_list %}
+	<a href="{% url 'detail' eng.id %}">{{ eng }}</a><br/>
+	
+{% endfor %}
+	
+	
+
+{% endblock content %}

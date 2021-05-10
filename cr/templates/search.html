@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <center>
+    {% if searched %}
+        <h1>You search for {{ searched }}</h1><br/>
+        
+        {% for eng in engineers %}
+            <a href="{% url 'detail' eng.id %}">{{ eng }}</a><br/>
+        {% endfor %}
+            
+    
+    {% else %}
+        <h1>You forgot to search an engineer...</h1>
+    {% endif %}
+    </center>
+{% endblock content %}
+    
