@@ -4,7 +4,7 @@
 <h1>
 
     <small class="text-muted center">{{ user.name }}</small><br/><br/>
-    
+      
     {% for key, value in att_p.items %}
     <small class="p-3 mb-2 bg-success text-white">出席點數 : {{ value }}</small>
     {% endfor %}
@@ -13,7 +13,7 @@
     {% for key, value in result_p.items %}
     <small class="p-3 mb-2 bg-warning text-dark">作業點數 : {{ value }}</small>
     {% endfor %}
-      
+    
     <!-- <button class="btn btn-primary" type="submit">Search</button> -->
     </form>
     <hr/>
@@ -51,10 +51,11 @@
             <td>{{ project.pm.username }}</td>
             <td>{{ project.remark }}</td>
             {% if current_user %}
-              <td><a class="btn btn-sm btn-info" href="{% url 'update-cr' user.id project.id %}">Update</a></td>
-              <td><a class="btn btn-sm btn-danger" href="{% url 'delete-cr' user.id project.id %}">Remove</a></td>
+            <td>
+              <a class="btn btn-sm btn-info" href="{% url 'update-cr' user.id project.id %}">Update</a>
+              <a class="btn btn-sm btn-danger" href="{% url 'delete-cr' user.id project.id %}">Remove</a>
             {% endif %}
-            
+            </td>
         {% endfor %}
       </tr>
     </tbody>

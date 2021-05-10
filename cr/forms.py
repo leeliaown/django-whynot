@@ -28,7 +28,7 @@ class TaskForm(ModelForm):
 
         labels = {
                 'user': "Select Engineer",
-                'cr_date': "", 
+                'cr_date': "CR date", 
                 'project_name': "", 
                 'cr_description': "", 
                 'cr_project_code': "", 
@@ -38,9 +38,15 @@ class TaskForm(ModelForm):
                 'remark': "",
         }
 
+        MONTHS = {
+            1:('1月'), 2:('2月'), 3:('3月'), 4:('4月'),
+            5:('5月'), 6:('6月'), 7:('7月'), 8:('8月'),
+            9:('9月'), 10:('10月'), 11:('11月'), 12:('12月')
+            }
+
         widgets = {
             'user': forms.Select(attrs={'class':'form-select'}),
-            'cr_date': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter a date, YYYY-MM-DD'}), 
+            'cr_date': forms.SelectDateWidget(months=MONTHS, attrs={'style': 'font-size: 15px'}), 
             'project_name': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter Project Name'}), 
             'cr_description': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter CR content'}), 
             'cr_project_code': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter Project Code'}), 
