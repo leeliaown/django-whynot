@@ -24,12 +24,13 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Date</th>
-        <th scope="col">Project Name</th>
-        <th scope="col">Project Code</th>
-        <th scope="col">CR description</th>
-        <th scope="col">Attend. Point</th>
-        <th scope="col">Result Point</th>
+        <th scope="col">Project</th>
+        <th scope="col">Proj. Code</th>
+        <th scope="col">CR Descr.</th>
+        <th scope="col">Attend.</th>
+        <th scope="col">Result</th>
         <th scope="col">PM</th>
+        <th scope="col">Remark</th>
 
       </tr>
     </thead>
@@ -48,6 +49,7 @@
             <td>{{ project.attendance_point }}</td>
             <td>{{ project.result_point }}</td>
             <td>{{ project.pm.username }}</td>
+            <td>{{ project.remark }}</td>
             {% if current_user %}
               <td><a class="btn btn-sm btn-info" href="{% url 'update-cr' user.id project.id %}">Update</a></td>
               <td><a class="btn btn-sm btn-danger" href="{% url 'delete-cr' user.id project.id %}">Remove</a></td>

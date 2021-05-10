@@ -22,7 +22,8 @@ class TaskForm(ModelForm):
                   'cr_project_code', 
                   'attendance_point',
                   'result_point',
-                  'pm'
+                  'pm',
+                  'remark',
                   )
 
         labels = {
@@ -34,6 +35,7 @@ class TaskForm(ModelForm):
                 'attendance_point': "出勤",
                 'result_point': "作業結果",
                 'pm': "PM",
+                'remark': "",
         }
 
         widgets = {
@@ -44,7 +46,8 @@ class TaskForm(ModelForm):
             'cr_project_code': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter Project Code'}), 
             'attendance_point': forms.Select(attrs={'class':'form-select'}),
             'result_point': forms.Select(attrs={'class':'form-select'}),
-            'pm': forms.Select(attrs={'class':'form-select'})
+            'pm': forms.Select(attrs={'class':'form-select'}),
+            'remark': forms.TextInput(attrs={'class':'form-control', 'placeholder': '[Optional] : Enter a reamrk for CR ' }),
 
         }
 

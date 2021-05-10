@@ -82,7 +82,7 @@ def detail(request, user_id):
 @login_required(login_url='login')
 def add_cr(request):
     submitted = False
-    current_user = request.user.username
+    # current_user = request.user.username
     # print(current_user)
     if request.method == "POST":
         form = TaskForm(request.POST)
@@ -129,7 +129,7 @@ def updateTask(request, pk, task_id):
     form = TaskForm(request.POST or None, instance=task)
     if form.is_valid():
         form.save()
-        return redirect('/')
+        return redirect('detail', pk)
     context = {
 
         'form': form,
@@ -144,7 +144,7 @@ def deleteTask(request, pk, task_id):
     # task.delete()
     if request.method == "POST":
         task.delete()
-        return redirect("/")
+        return redirect("detail", pk)
 
 
     context = {

@@ -35,6 +35,8 @@ class Task(models.Model):
     )   
     )
 
+    remark = models.CharField(max_length=100, blank=True)
+
     def __str__(self):
         return f"{self.user} : {self.cr_description}  "
 
