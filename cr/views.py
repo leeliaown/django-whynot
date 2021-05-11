@@ -82,19 +82,22 @@ def detail(request, user_id):
 @login_required(login_url='login')
 def add_cr(request):
     submitted = False
-    # current_user = request.user.username
+
     # print(current_user)
     if request.method == "POST":
-        form = TaskForm(request.POST)
+        form = TaskForm(request.POST, request=request)
+        
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/add_cr?submitted=True')
+
+
     else:
-        form = TaskForm
+        form = TaskForm(request=request)
         if 'submitted' in request.GET:
             submitted = True
 
-    return render(request, 'add_cr.html', {'form':form, 'submitted': submitted, })
+    return render(request, 'add_cr.html', {'form':form, 'submitted': submitted})
 
 
 def loginPage(request):
@@ -126,7 +129,7 @@ def logoutUser(request):
 def updateTask(request, pk, task_id):
     eng = Engineer.objects.get(pk=pk)
     task = eng.task_set.get(id=task_id)
-    form = TaskForm(request.POST or None, instance=task)
+    form = TaskForm(request.POST or None, instance=task, request=request)
     if form.is_valid():
         form.save()
         return redirect('detail', pk)

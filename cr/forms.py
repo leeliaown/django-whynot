@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import Task
+from .models import Engineer, Task
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -13,6 +13,12 @@ class CreateUserForm(UserCreationForm):
 
        
 class TaskForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(TaskForm, self).__init__(*args, **kwargs)
+        self.initial['pm'] = self.request.user
+
     class Meta:
         model = Task
         fields = ('user',
@@ -26,6 +32,7 @@ class TaskForm(ModelForm):
                   'remark',
                   )
 
+
         labels = {
                 'user': "Select Engineer",
                 'cr_date': "CR date", 
@@ -34,7 +41,7 @@ class TaskForm(ModelForm):
                 'cr_project_code': "", 
                 'attendance_point': "出勤",
                 'result_point': "作業結果",
-                'pm': "PM",
+                'pm': "PM (系統自動帶入)",
                 'remark': "",
         }
 
@@ -43,21 +50,23 @@ class TaskForm(ModelForm):
             5:('5月'), 6:('6月'), 7:('7月'), 8:('8月'),
             9:('9月'), 10:('10月'), 11:('11月'), 12:('12月')
             }
-
+        # obj = Task._meta.get_fields()
+        # print(obj)
         widgets = {
             'user': forms.Select(attrs={'class':'form-select'}),
-            'cr_date': forms.SelectDateWidget(months=MONTHS, attrs={'style': 'font-size: 15px'}), 
+            # 'cr_date': forms.SelectDateWidget(months=MONTHS, attrs={'style': 'font-size: 15px'}),
+            'cr_date': forms.NumberInput(attrs={'type': 'date'}),
             'project_name': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter Project Name'}), 
             'cr_description': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter CR content'}), 
             'cr_project_code': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter Project Code'}), 
             'attendance_point': forms.Select(attrs={'class':'form-select'}),
             'result_point': forms.Select(attrs={'class':'form-select'}),
-            'pm': forms.Select(attrs={'class':'form-select'}),
+            'pm': forms.TextInput(attrs={'class':'form-control','readonly':True}),
             'remark': forms.TextInput(attrs={'class':'form-control', 'placeholder': '[Optional] : Enter a reamrk for CR ' }),
 
         }
 
-
+        #'value': Task._meta.get_field('pm').
 
 
     
