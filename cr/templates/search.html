@@ -7,7 +7,18 @@
         <h1>You search for {{ searched }}</h1><br/>
         
         {% for eng in engineers %}
-            <a href="{% url 'detail' eng.id %}">{{ eng }}</a><br/>
+        <div class="container">
+        <div class="col-sm-2">
+        <ul>
+            <li>
+            <a href="{% url 'detail' eng.id %}">{{ eng }}</a>
+            <a type="button" class="btn btn-primary" href="{% url 'add-cr' %}">Add CR</a>
+
+            </li>
+        
+        </ul>
+        </div>
+        </div>
         {% endfor %}
             
     

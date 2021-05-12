@@ -92,6 +92,7 @@ def add_cr(request):
             return HttpResponseRedirect('/add_cr?submitted=True')
 
 
+
     else:
         form = TaskForm(request=request)
         if 'submitted' in request.GET:
@@ -152,8 +153,8 @@ def deleteTask(request, pk, task_id):
 
     context = {
 
-        'item': task
-
+        'item': task,
+        'eng': eng,
     }
 
     return render(request, 'delete.html', context)
