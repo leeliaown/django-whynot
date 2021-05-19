@@ -77,7 +77,6 @@ def detail(request, user_id):
         'user': user,
         'att_p': attendance_p,
         'result_p': result_p,
-        # 'data': searchresult,
         'myFilter': myFilter,
         'task_date': task_date,
 
