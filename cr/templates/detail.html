@@ -1,28 +1,51 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-<h1>
-
-    <small class="text-muted center">{{ user.name }}</small><br/><br/>
-      
-    {% for key, value in att_p.items %}
-    <small class="p-3 mb-2 bg-success text-white">出席點數 : {{ value }}</small>
-    {% endfor %}
-      
+<div class="col">
+  <div class="row">
+   
+    <small class="text-muted center h1">{{ user.name }}</small><hr/>
+ 
     
-    {% for key, value in result_p.items %}
-    <small class="p-3 mb-2 bg-warning text-dark">作業點數 : {{ value }}</small>
-    {% endfor %}
+    <dl class="row">
+      {% for key, value in att_p.items %}
+      <dt class="col-sm-2 bg-success text-white h2">出席點數 : {{ value }}</dt>
+      {% endfor %}
+      {% for key, value in result_p.items %}
+      <dt class="col-sm-2 bg-warning text-dark h2">作業點數 : {{ value }}</dt>
+      {% endfor %}
+    </dl>
     
-    <!-- <button class="btn btn-primary" type="submit">Search</button> -->
+    <form method="GET">
+      CR Date Filter (yyyy-mm-dd)：
+      <div class="row">
+        <div class="col pb-3">
+          {{ myFilter.form}}
+          <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+        <div class="col">
+          
+        </div>
+      </div>
     </form>
-    <hr/>
-</h1>
+
+    <!-- <div class="card card-body"> -->
+      
+      <!-- <form method="GET">
+        {{ myFilter.form}}
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form> -->
+  </div>
+</div>
 <table class="table table-sm table-hover">
   
     <thead class="table-dark">
       <tr>
+        
         <th scope="col">#</th>
+        {% if current_user %}
+        <th scope="col"></th>
+        {% endif %}
         <th scope="col">Date</th>
         <th scope="col">Project</th>
         <th scope="col">Proj. Code</th>
@@ -36,12 +59,17 @@
     </thead>
     <tbody>
 
-        {% for project in user.task_set.all %}
+        {% for project in task_date %}
 
       <tr>
         <th scope="row">{{ forloop.counter }}</th>
         
-
+            {% if current_user %}
+            <td>
+              <a class="btn btn-sm btn-info" href="{% url 'update-cr' user.id project.id %}">Update</a>
+              <a class="btn btn-sm btn-danger" href="{% url 'delete-cr' user.id project.id %}">Remove</a>
+            {% endif %} 
+            </td>
             <td>{{ project.cr_date|date:"Y-m-d" }}</td>
             <td>{{ project.project_name }}</td>
             <td>{{ project.cr_project_code }}</td>
@@ -50,12 +78,7 @@
             <td>{{ project.result_point }}</td>
             <td>{{ project.pm.username }}</td>
             <td>{{ project.remark }}</td>
-            {% if current_user %}
-            <td>
-              <a class="btn btn-sm btn-info" href="{% url 'update-cr' user.id project.id %}">Update</a>
-              <a class="btn btn-sm btn-danger" href="{% url 'delete-cr' user.id project.id %}">Remove</a>
-            {% endif %}
-            </td>
+            
         {% endfor %}
       </tr>
     </tbody>

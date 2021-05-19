@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import TaskForm, CreateUserForm
+from .forms import TaskForm, CreateUserForm, CrSearchForm
 from django.contrib import messages
 from .models import Engineer, Task
 from django.contrib.auth.models import User
@@ -12,7 +12,6 @@ from django.db.models import Sum
 
 def index(request):
     user_list = Engineer.objects.all()
-    
     context = {
 
         'user_list': user_list
@@ -65,14 +64,23 @@ def detail(request, user_id):
     user = get_object_or_404(Engineer, pk=user_id)
     current_user = request.user.username
     eng = Engineer.objects.get(pk=user_id)
-    attendance_p = eng.task_set.aggregate(Sum('attendance_point'))
-    result_p = eng.task_set.aggregate(Sum('result_point'))
+
+    task_date = user.task_set.all()
+    myFilter = TaskFilter(request.GET, queryset=task_date)
+    task_date = myFilter.qs
+
+    attendance_p = task_date.aggregate(Sum('attendance_point'))
+    result_p = task_date.aggregate(Sum('result_point'))
     context = {
 
         'current_user': current_user,
         'user': user,
         'att_p': attendance_p,
-        'result_p': result_p
+        'result_p': result_p,
+        # 'data': searchresult,
+        'myFilter': myFilter,
+        'task_date': task_date,
+
 
     }
 
@@ -127,6 +135,7 @@ def logoutUser(request):
 	return redirect('home')
 
 
+@login_required(login_url='login')
 def updateTask(request, pk, task_id):
     eng = Engineer.objects.get(pk=pk)
     task = eng.task_set.get(id=task_id)
@@ -142,6 +151,8 @@ def updateTask(request, pk, task_id):
     }
     return render(request, 'update.html', context)
 
+
+@login_required(login_url='login')
 def deleteTask(request, pk, task_id):
     eng = Engineer.objects.get(pk=pk)
     task = eng.task_set.get(id=task_id)

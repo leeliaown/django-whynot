@@ -17,6 +17,8 @@ class Engineer(models.Model):
 
 
 class Task(models.Model):
+    class Meta:
+        ordering = ['cr_date']
     user = models.ForeignKey(Engineer, on_delete=models.CASCADE)
     pm = models.ForeignKey(st.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
     cr_date = models.DateField()

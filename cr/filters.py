@@ -1,12 +1,14 @@
+from django.forms import widgets
 import django_filters
-from django_filters import DateFilter
+from django_filters import DateFilter, DateFromToRangeFilter
 from .models import Task
 
 
 class TaskFilter(django_filters.FilterSet):
-    start_date = DateFilter(field_name='cr_date', lookup_expr="gte")
-    end_date = DateFilter(field_name='cr_date', lookup_expr="lte")
+    start_date = DateFromToRangeFilter(field_name='cr_date', label="")
+    # end_date = DateFromToRangeFilter(field_name='cr_date', lookup_expr="lte", label="End Date")
     class Meta:
         model = Task
-        fields = ['pm',]
+        fields = ['cr_date']
         exclude = ['cr_date']
+
