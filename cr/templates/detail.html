@@ -16,12 +16,12 @@
       {% endfor %}
     </dl>
     
-    <form method="GET">
-      CR Date Filter (yyyy-mm-dd)：
+    <form method="GET" >
       <div class="row">
         <div class="col pb-3">
           {{ myFilter.form}}
           <button class="btn btn-primary" type="submit">Search</button>
+          <a class="btn btn-secondary" href="{% url 'detail' user.id %}">Reset</a>
         </div>
         <div class="col">
           
