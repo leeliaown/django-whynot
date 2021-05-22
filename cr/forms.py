@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, widgets
 from django import forms
 from .models import Engineer, Task
 from django.shortcuts import render
@@ -6,15 +6,16 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
-class CrSearchForm(ModelForm):
-    start_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
-    end_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
-
+class CreateEngineerForm(ModelForm):
     class Meta:
-        model = Task
-        fields = ['start_date', 'end_date']
+        model = Engineer
+        fields = ['name', 'eng_id', 'created_date', ]
 
+        widgets = {
 
+            'created_date': forms.DateInput(attrs={'type': 'date'}),
+
+        }
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -72,7 +73,7 @@ class TaskForm(ModelForm):
             'cr_project_code': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Enter Project Code'}), 
             'attendance_point': forms.Select(attrs={'class':'form-select'}),
             'result_point': forms.Select(attrs={'class':'form-select'}),
-            'pm': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+            'pm': forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
             'remark': forms.TextInput(attrs={'class':'form-control', 'placeholder': '[Optional] : Enter a remark for CR ' }),
 
         }

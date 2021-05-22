@@ -5,7 +5,7 @@
 <center>
 <div class="col-sm-6">
     <!-- <h1>Add CR record</h1> -->
-    <p>Are you sure want to delete "{{ item }}"?</p>
+    <p class="lead">Are you sure want to delete "<cite>{{ item }}</cite>"?</p>
     <form action="" method="POST">
         {% csrf_token %}
         <a href="{% url 'detail' eng.id %}">Cancel</a>

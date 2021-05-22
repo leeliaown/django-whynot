@@ -18,5 +18,9 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('cr.urls'))
+    path('', include('cr.urls')),
+    # path('api/', include('rest_framework.urls')),
 ]
+
+admin.site.site_header = "Why-not CR DataBase"
+admin.site.index_title = "CR Admin"

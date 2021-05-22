@@ -1,13 +1,14 @@
 from django.shortcuts import render, HttpResponse, redirect, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import TaskForm, CreateUserForm, CrSearchForm
+from .forms import TaskForm, CreateUserForm, CreateEngineerForm
 from django.contrib import messages
 from .models import Engineer, Task
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .filters import TaskFilter
 from django.db.models import Sum 
+import datetime
 
 
 def index(request):
@@ -15,7 +16,6 @@ def index(request):
     context = {
 
         'user_list': user_list
-
 
     }
     return render(request, 'index.html', context)
@@ -35,8 +35,32 @@ def search_engineer(request):
     
     else:
         return render(request, 'search.html', {})
+        
 
+@login_required(login_url='login')
+def engineer_register(request):
+    submitted = False
+    form = CreateEngineerForm()
 
+    if request.method == "POST":
+        form = CreateEngineerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/engineer_register?submitted=True')
+    else:
+        form = CreateEngineerForm
+        if 'submitted' in request.GET:
+            submitted = True
+    
+    context = {
+
+        'form': form,
+        'submitted': submitted
+    }
+
+    return render(request, 'engineer_register.html', context)
+
+@login_required(login_url='login')
 def register(request):
     submitted = False
     form = CreateUserForm()
@@ -65,10 +89,40 @@ def detail(request, user_id):
     current_user = request.user.username
     eng = Engineer.objects.get(pk=user_id)
 
-    task_date = user.task_set.all()
-    myFilter = TaskFilter(request.GET, queryset=task_date)
-    task_date = myFilter.qs
 
+    if request.GET.get('s1') == '13':
+        # print('user clicked summary')
+        year = datetime.date.today().year
+        query_set = user.task_set.filter(cr_date__range=[f"{year}-01-01", f"{year}-03-31"])
+        myFilter = TaskFilter(request.GET, queryset=query_set)
+        task_date = myFilter.qs
+
+    elif request.GET.get('s2') == '46':
+        year = datetime.date.today().year
+        query_set = user.task_set.filter(cr_date__range=[f"{year}-04-01", f"{year}-06-30"])
+        myFilter = TaskFilter(request.GET, queryset=query_set)
+        task_date = myFilter.qs
+    
+    elif request.GET.get('s3') == '79':
+        year = datetime.date.today().year
+        query_set = user.task_set.filter(cr_date__range=[f"{year}-07-01", f"{year}-09-30"])
+        myFilter = TaskFilter(request.GET, queryset=query_set)
+        task_date = myFilter.qs
+
+    elif request.GET.get('s4') == '1012':
+        year = datetime.date.today().year
+        query_set = user.task_set.filter(cr_date__range=[f"{year}-10-01", f"{year}-12-31"])
+        myFilter = TaskFilter(request.GET, queryset=query_set)
+        task_date = myFilter.qs
+
+
+    else:
+    #create a filter
+        task_date = user.task_set.all()
+        myFilter = TaskFilter(request.GET, queryset=task_date)
+        task_date = myFilter.qs
+
+    #add counting 
     attendance_p = task_date.aggregate(Sum('attendance_point'))
     result_p = task_date.aggregate(Sum('result_point'))
     context = {
@@ -79,6 +133,7 @@ def detail(request, user_id):
         'result_p': result_p,
         'myFilter': myFilter,
         'task_date': task_date,
+        # 'submitbutton': submitbutton,
 
 
     }
@@ -97,7 +152,6 @@ def add_cr(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/add_cr?submitted=True')
-
 
 
     else:
@@ -120,7 +174,7 @@ def loginPage(request):
         
 			if user is not None:
 				login(request, user)
-				return redirect('add-cr')
+				return redirect('home')
 			else:
 		            messages.info(request, 'Username OR password is incorrect')
 

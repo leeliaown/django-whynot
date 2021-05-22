@@ -1,11 +1,8 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from datetime import datetime
 from django.conf import settings as st
-
 # Create your models here.
+
 class Engineer(models.Model):
     name = models.CharField(max_length=20)
     eng_id = models.CharField(max_length=50)
@@ -13,8 +10,7 @@ class Engineer(models.Model):
 
     def __str__(self):
         return f"{self.name}"
-
-
+        
 
 class Task(models.Model):
     class Meta:
