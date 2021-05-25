@@ -3,12 +3,330 @@
 
 {% block content %}
 
-{% for eng in user_list %}
+<!-- <button type="button" class="btn btn-primary">
+	Notifications <span class="badge bg-secondary">4</span>
+  </button> -->
 
-	<a href="{% url 'detail' eng.id %}">{{ eng }}</a><br/>
+<!-- <span class="badge bg-light text-dark">Light</span>
+<span class="badge bg-dark">Dark</span> -->
+
+<style>
+
+	.cards {
+		margin: 0 auto;
+		/* max-width: 1000px; */
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		gap: 10px;
+		font-family: sans-serif;
+		}
+
+
+
+
+</style>
+
+<div class="cards">
+	<div class="card-header">Presales Dept.   
+	<ul class="list-group list-group-flush">
+		<div class="card-body">
+		<li class="list-group-item">
+			{% for eng in user_list %}
+			{% if eng.eng_department == 'Presales Dept.'%}
+				<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+			{% endif %}
+			{% endfor %}
+		</li>
+		</div>
+	</div>
+		
+	</ul>
+	<div class="card-header">TWM Fixed Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'TWM Fixed Team'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+		</div>	
+
+	<div class="card-header">TWM Mobile Team   
+			<ul class="list-group list-group-flush">
+				<div class="card-body">
+				<li class="list-group-item">
+					{% for eng in user_list %}
+					{% if eng.eng_department == 'TWM Mobile Team'%}
+						<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+					{% endif %}
+					{% endfor %}
+				</li>
+				</div>
+			</ul>
+	</div>	
+
+	<div class="card-header">EBG/Support Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'EBG/Support Team'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>	
+
+
+	<div class="card-header">CE MA Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'CE MA Team'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>	
+
+	<div class="card-header">CE Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'CE Team'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>	
+
+	<div class="card-header">TWM MA Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'TWM MA Team'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>	
+
+	<div class="card-header">APTG Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'APTG Team'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>	
+
+	<div class="card-header">Enterprise Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'Enterprise Team'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>	
+
+	<div class="card-header">FET MA Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'FET MA Team'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>
 	
-{% endfor %}
+	<div class="card-header">Enterprise MA Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'Enterprise MA Team'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>	
+
+	<div class="card-header">ON Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'ON Team'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>	
+
+	<div class="card-header">CSR Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'CSR Team'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>	
+
+	<div class="card-header">CMTS Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'CMTS Team'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>
 	
+	<div class="card-header">Central Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'Central Team'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>
 	
+	<div class="card-header">South Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'South Team'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>	
+
+	<div class="card-header">CVG Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == ''%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>
+
+	<div class="card-header">TWM Dept.  
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'TWM Dept.'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>
+	
+	<div class="card-header">TWM ALU Team   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'TWM ALU Team'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>	
+
+	<div class="card-header">APTG/FET/Enterprise Dept.   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'APTG/FET/Enterprise Dept.'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>
+
+	<div class="card-header">ON/CMTS Dept.   
+		<ul class="list-group list-group-flush">
+			<div class="card-body">
+			<li class="list-group-item">
+				{% for eng in user_list %}
+				{% if eng.eng_department == 'ON/CMTS Dept.'%}
+					<a href="{% url 'detail' eng.id %}">{{ eng }}<br/></a>
+				{% endif %}
+				{% endfor %}
+			</li>
+			</div>
+		</ul>
+	</div>
+
+</div>	
+
 
 {% endblock content %}
+	{% for eng in user_list %}
+	<a href="{% url 'detail' eng.id %}" class="item">{{ eng }}, </>
+
+	{% endfor %}

@@ -4,8 +4,6 @@ from django.contrib.auth.decorators import login_required
 from .forms import TaskForm, CreateUserForm, CreateEngineerForm
 from django.contrib import messages
 from .models import Engineer, Task
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 from .filters import TaskFilter
 from django.db.models import Sum 
 import datetime
@@ -88,7 +86,7 @@ def detail(request, user_id):
     user = get_object_or_404(Engineer, pk=user_id)
     current_user = request.user.username
     eng = Engineer.objects.get(pk=user_id)
-
+    caption_text = ""
 
     if request.GET.get('s1') == '13':
         # print('user clicked summary')
@@ -96,24 +94,28 @@ def detail(request, user_id):
         query_set = user.task_set.filter(cr_date__range=[f"{year}-01-01", f"{year}-03-31"])
         myFilter = TaskFilter(request.GET, queryset=query_set)
         task_date = myFilter.qs
+        caption_text = "1-3月紀錄"
 
     elif request.GET.get('s2') == '46':
         year = datetime.date.today().year
         query_set = user.task_set.filter(cr_date__range=[f"{year}-04-01", f"{year}-06-30"])
         myFilter = TaskFilter(request.GET, queryset=query_set)
         task_date = myFilter.qs
+        caption_text = "4-6月紀錄"
     
     elif request.GET.get('s3') == '79':
         year = datetime.date.today().year
         query_set = user.task_set.filter(cr_date__range=[f"{year}-07-01", f"{year}-09-30"])
         myFilter = TaskFilter(request.GET, queryset=query_set)
         task_date = myFilter.qs
+        caption_text = "7-9月紀錄"
 
     elif request.GET.get('s4') == '1012':
         year = datetime.date.today().year
         query_set = user.task_set.filter(cr_date__range=[f"{year}-10-01", f"{year}-12-31"])
         myFilter = TaskFilter(request.GET, queryset=query_set)
         task_date = myFilter.qs
+        caption_text = "10-12月紀錄"
 
 
     else:
@@ -121,6 +123,7 @@ def detail(request, user_id):
         task_date = user.task_set.all()
         myFilter = TaskFilter(request.GET, queryset=task_date)
         task_date = myFilter.qs
+
 
     #add counting 
     attendance_p = task_date.aggregate(Sum('attendance_point'))
@@ -133,7 +136,7 @@ def detail(request, user_id):
         'result_p': result_p,
         'myFilter': myFilter,
         'task_date': task_date,
-        # 'submitbutton': submitbutton,
+        'caption_text':caption_text,
 
 
     }

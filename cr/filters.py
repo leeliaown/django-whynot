@@ -2,7 +2,6 @@ from django.db.models import fields
 from django.forms import widgets
 import django_filters
 from django_filters import DateFromToRangeFilter
-from django_filters.filters import DateFilter
 from django_filters.widgets import RangeWidget
 from .models import Task
 import datetime

@@ -6,6 +6,7 @@ from django.conf import settings as st
 class Engineer(models.Model):
     name = models.CharField(max_length=20)
     eng_id = models.CharField(max_length=50)
+    eng_department = models.CharField(max_length=100)
     created_date = models.DateField(default=datetime.now)
 
     def __str__(self):
@@ -20,7 +21,7 @@ class Task(models.Model):
     cr_date = models.DateField()
     project_name = models.CharField(max_length=200, blank=True)
     cr_description = models.CharField(max_length=100)
-    cr_project_code = models.CharField(max_length=100)
+    cr_project_code = models.CharField(max_length=100, blank=True)
     attendance_point = models.SmallIntegerField(
         choices=(
         (0, "Failed"),

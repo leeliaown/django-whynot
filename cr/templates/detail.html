@@ -1,6 +1,92 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+
+<style>
+
+  .result {
+    background: rgb(243, 118, 118);
+    font-family: Microsoft JhengHei, sans-serif;
+  }
+
+  .attendance {
+    background: rgb(46, 147, 206);
+    font-family: Microsoft JhengHei, sans-serif;
+
+  }
+
+  .colbar {
+    background: khaki;
+    font-family: cursive, sans-serif;
+
+  }
+
+  .cr_date {
+
+    font-size: medium;
+    font-weight: bold;
+
+
+  }
+
+  .project_name {
+
+    font-size: medium;
+    font-weight: bold;
+
+  }
+
+  .project_code {
+
+    font-size: medium;
+    font-weight: bold;
+
+  }
+
+  .description {
+
+    font-size: medium;
+    font-weight: bold;
+
+  }
+
+  .attend_point {
+
+    font-size: medium;
+    font-weight: bold;
+
+  }  
+
+  .result_point {
+
+    font-size: medium;
+    font-weight: bold;
+
+  } 
+
+  .cr_pm {
+
+    font-size: medium;
+    font-weight: bold;
+
+  }
+
+  .cr_remark {
+
+    font-size: medium;
+    font-weight: bold;
+
+  }
+
+  .cr_number {
+
+    font-size: medium;
+    font-weight: bold;
+
+  }
+
+</style>
+
 <div class="col">
   <div class="row">
    
@@ -9,10 +95,10 @@
     
     <dl class="row">
       {% for key, value in att_p.items %}
-      <dt class="col-sm-2 bg-success text-white h2">出席點數 : {{ value }}</dt>
+      <dt class="col-sm-2 text-white h3 attendance">出席點數 : {{ value }}</dt>
       {% endfor %}
       {% for key, value in result_p.items %}
-      <dt class="col-sm-2 bg-warning text-dark h2">作業點數 : {{ value }}</dt>
+      <dt class="col-sm-2  text-white h3 result">作業點數 : {{ value }}</dt>
       {% endfor %}
     </dl>
 
@@ -23,36 +109,35 @@
           {{ myFilter.form}}
           <button class="btn btn-primary" type="submit">Filter</button>
           <a class="btn btn-secondary" href="{% url 'detail' user.id %}">Reset</a>
-          <button class="btn btn-dark" type="submit" name="s1" value="13">1-3</button>
-          <button class="btn btn-dark" type="submit" name="s2" value="46">4-6</button>
-          <button class="btn btn-dark" type="submit" name="s3" value="79">7-9</button>
-          <button class="btn btn-dark" type="submit" name="s4" value="1012">10-12</button>
+          <button class="btn btn-outline-success" type="submit" name="s1" value="13">1-3</button>
+          <button class="btn btn-outline-success" type="submit" name="s2" value="46">4-6</button>
+          <button class="btn btn-outline-success" type="submit" name="s3" value="79">7-9</button>
+          <button class="btn btn-outline-success " type="submit" name="s4" value="1012">10-12</button>
         </div>
         <div class="col">
-          
         </div>
       </div>
     </form>
   </div>
 </div>
-<table class="table table-sm table-hover">
+<table class="table table-sm table-hover table-responsive-sm">
   
-    <thead class="table-dark">
+    <thead class=" colbar">
       <tr>
-        
         <th scope="col">#</th>
-        {% if request.user.is_authenticated %}
-        <th scope="col"></th>
+        
+        {% if current_user %}
+        <th scope="col">Ops.</th>
+        {% else %}
+        <th scope="col-sm-"> </th>
         {% endif %}
         <th scope="col">Date</th>
-        <th scope="col">Project</th>
-        <th scope="col">Project Code</th>
         <th scope="col">Description</th>
         <th scope="col">Attend.</th>
         <th scope="col">Result</th>
         <th scope="col">PM</th>
         <th scope="col">Remark</th>
-
+        
       </tr>
     </thead>
     <tbody>
@@ -60,26 +145,24 @@
         {% for project in task_date %}
 
       <tr>
-        <th scope="row">{{ forloop.counter }}</th>
-        
-            {% if request.user.is_authenticated %}
+        <th class="align-middle cr_number" scope="row">{{ forloop.counter }}</th>
             <td>
               <span class="user">
-              <a class="btn btn-sm btn-info" href="{% url 'update-cr' user.id project.id %}">Update</a>
-              <a class="btn btn-sm btn-danger" href="{% url 'delete-cr' user.id project.id %}">Remove</a>
+              {% if request.user == project.pm %}
+              <a class="btn btn-sm btn-info" href="{% url 'update-cr' user.id project.id %}">U</a>
+              <a class="btn btn-sm btn-danger" href="{% url 'delete-cr' user.id project.id %}">R</a>
               </span>
-            {% endif %} 
+              {% endif %} 
             </td>
-            <td>{{ project.cr_date|date:"Y-m-d" }}</td>
-            <td>{{ project.project_name }}</td>
-            <td>{{ project.cr_project_code }}</td>
-            <td>{{ project.cr_description }}</td>
-            <td>{{ project.attendance_point }}</td>
-            <td>{{ project.result_point }}</td>
-            <td>{{ project.pm.username }}</td>
-            <td>{{ project.remark }}</td>
+            <td class=" align-middle cr_date ">{{ project.cr_date|date:"Y-m-d" }}</td>
+            <td class=" align-middle description ">{{ project.cr_description }}</td>
+            <td class=" align-middle attend_point ">{{ project.attendance_point }}</td>
+            <td class=" align-middle result_point ">{{ project.result_point }}</td>
+            <td class=" align-middle cr_pm">{{ project.pm.username }}</td>
+            <td class=" align-middle cr_remark">{{ project.remark }}</td>
             
         {% endfor %}
+        <caption>{{ caption_text }}</caption>
       </tr>
     </tbody>
 
