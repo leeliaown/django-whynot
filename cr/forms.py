@@ -9,7 +9,15 @@ from django.contrib.auth.models import User
 class CreateEngineerForm(ModelForm):
     class Meta:
         model = Engineer
-        fields = ['name', 'eng_id', 'created_date', ]
+        fields = ['name', 'eng_id', 'eng_department', 'created_date', ]
+
+        labels = {
+
+            'eng_id': '員工ID',
+            'eng_department': '員工部門'            
+
+
+        }
 
         widgets = {
 

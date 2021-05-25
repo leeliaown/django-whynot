@@ -11,6 +11,7 @@ import datetime
 
 def index(request):
     user_list = Engineer.objects.all()
+
     context = {
 
         'user_list': user_list
@@ -86,6 +87,7 @@ def detail(request, user_id):
     user = get_object_or_404(Engineer, pk=user_id)
     current_user = request.user.username
     eng = Engineer.objects.get(pk=user_id)
+    # eng_count = eng.objects.count()
     caption_text = ""
 
     if request.GET.get('s1') == '13':
@@ -137,6 +139,7 @@ def detail(request, user_id):
         'myFilter': myFilter,
         'task_date': task_date,
         'caption_text':caption_text,
+        # 'eng_count': eng_count,
 
 
     }
