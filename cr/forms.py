@@ -47,6 +47,7 @@ class TaskForm(ModelForm):
                   'cr_project_code', 
                   'attendance_point',
                   'result_point',
+                  'rollback_point',
                   'pm',
                   'remark',
                   )
@@ -60,6 +61,7 @@ class TaskForm(ModelForm):
                 'cr_project_code': "", 
                 'attendance_point': "出勤",
                 'result_point': "作業結果",
+                'rollback_point': "通報點數",
                 'pm': "PM (系統自動帶入)",
                 'remark': "",
         }
@@ -81,6 +83,7 @@ class TaskForm(ModelForm):
             'cr_project_code': forms.HiddenInput(attrs={'class':'form-control', 'placeholder': 'Enter Project Code'}), 
             'attendance_point': forms.Select(attrs={'class':'form-select'}),
             'result_point': forms.Select(attrs={'class':'form-select'}),
+            'rollback_point': forms.Select(attrs={'class':'form-select'}),
             'pm': forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
             'remark': forms.TextInput(attrs={'class':'form-control', 'placeholder': '[Optional] : Enter a remark for CR ' }),
 

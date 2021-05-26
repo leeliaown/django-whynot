@@ -85,6 +85,14 @@
 
   }
 
+  .rollback {
+
+    background: rgb(203, 146, 214);
+    font-family: Microsoft JhengHei, sans-serif;
+
+
+  }
+
 </style>
 
 <div class="col">
@@ -100,6 +108,10 @@
       {% for key, value in result_p.items %}
       <dt class="col-sm-2  text-white h3 result">作業點數 : {{ value }}</dt>
       {% endfor %}
+      {% for key, value in rollback_p.items %}
+      <dt class="col-sm-2  text-white h3 rollback">通報點數 : {{ value }}</dt>
+      {% endfor %}
+      <dt class="col-sm-2  text-dark h3">總點數 : {{ total_p }}</dt>
     </dl>
 
     
@@ -135,6 +147,7 @@
         <th scope="col">Description</th>
         <th scope="col">Attend.</th>
         <th scope="col">Result</th>
+        <th scope="col">RollBack</th>
         <th scope="col">PM</th>
         <th scope="col">Remark</th>
         
@@ -158,6 +171,7 @@
             <td class=" align-middle description ">{{ project.cr_description }}</td>
             <td class=" align-middle attend_point ">{{ project.attendance_point }}</td>
             <td class=" align-middle result_point ">{{ project.result_point }}</td>
+            <td class=" align-middle result_point ">{{ project.rollback_point }}</td>
             <td class=" align-middle cr_pm">{{ project.pm.username }}</td>
             <td class=" align-middle cr_remark">{{ project.remark }}</td>
             

@@ -9,9 +9,10 @@
 		margin: 0 auto;
 		/* max-width: 1000px; */
 		display: grid;
-		grid-template-columns: repeat(5, 1fr);
-		gap: 10px;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 5px;
 		font-family: sans-serif;
+
 		}
 
 	.bb {
@@ -20,6 +21,7 @@
 		font-style: normal;
 		color: brown;
 		background-color: oldlace;
+		font-size: 1em;
 
 	}
 
@@ -28,6 +30,9 @@
 		font-weight: bold;
 		font-style: italic;
 		font-size: large;
+		text-decoration: underline;
+
+
 	}
 
 </style>
@@ -41,10 +46,17 @@
 				{% for eng in user_list %}
 				{% if eng.eng_department == 'Presales Dept.'%}
 				<!-- <a class=" " href="{% url 'detail' eng.id %}">{{ eng }}-<b>{{eng.task_set.filter|length}}</b><br/></a> -->
+				{% if not eng.eng_active %}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-					
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -58,9 +70,17 @@
 			<li class="list-group-item">
 				{% for eng in user_list %}
 				{% if eng.eng_department == 'TWM Fixed Team'%}
+				{% if not eng.eng_active%}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -74,10 +94,17 @@
 				<li class="list-group-item">
 					{% for eng in user_list %}
 					{% if eng.eng_department == 'TWM Mobile Team'%}
+					{% if not eng.eng_active%}
 					<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
-						{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
+						{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
 						
-					</a>
+					</a></br>
+					{% else %}
+					<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
+
+					</a></br>
+					{% endif %}
 					{% endif %}
 					{% endfor %}
 				</li>
@@ -91,9 +118,17 @@
 			<li class="list-group-item">
 				{% for eng in user_list %}
 				{% if eng.eng_department == 'EBG/Support Team'%}
+				{% if not eng.eng_active%}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -108,9 +143,17 @@
 			<li class="list-group-item">
 				{% for eng in user_list %}
 				{% if eng.eng_department == 'CE MA Team'%}
+				{% if not eng.eng_active%}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -124,9 +167,17 @@
 			<li class="list-group-item">
 				{% for eng in user_list %}
 				{% if eng.eng_department == 'CE Team'%}
+				{% if not eng.eng_active%}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -140,9 +191,17 @@
 			<li class="list-group-item">
 				{% for eng in user_list %}
 				{% if eng.eng_department == 'TWM MA Team'%}
+				{% if not eng.eng_active%}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -156,9 +215,17 @@
 			<li class="list-group-item">
 				{% for eng in user_list %}
 				{% if eng.eng_department == 'APTG Team'%}
+				{% if not eng.eng_active%}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -172,9 +239,17 @@
 			<li class="list-group-item">
 				{% for eng in user_list %}
 				{% if eng.eng_department == 'Enterprise Team'%}
+				{% if not eng.eng_active%}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -188,9 +263,17 @@
 			<li class="list-group-item">
 				{% for eng in user_list %}
 				{% if eng.eng_department == 'FET MA Team'%}
+				{% if not eng.eng_active%}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -204,9 +287,17 @@
 			<li class="list-group-item">
 				{% for eng in user_list %}
 				{% if eng.eng_department == 'Enterprise MA Team'%}
+				{% if not eng.eng_active%}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -220,9 +311,17 @@
 			<li class="list-group-item">
 				{% for eng in user_list %}
 				{% if eng.eng_department == 'ON Team'%}
+				{% if not eng.eng_active%}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -236,9 +335,17 @@
 			<li class="list-group-item">
 				{% for eng in user_list %}
 				{% if eng.eng_department == 'CSR Team'%}
+				{% if not eng.eng_active%}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -252,9 +359,17 @@
 			<li class="list-group-item">
 				{% for eng in user_list %}
 				{% if eng.eng_department == 'CMTS Team'%}
+				{% if not eng.eng_active%}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -268,9 +383,17 @@
 			<li class="list-group-item">
 				{% for eng in user_list %}
 				{% if eng.eng_department == 'Central Team'%}
+				{% if not eng.eng_active%}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -284,9 +407,17 @@
 			<li class="list-group-item">
 				{% for eng in user_list %}
 				{% if eng.eng_department == 'South Team'%}
+				{% if not eng.eng_active%}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -300,9 +431,17 @@
 			<li class="list-group-item">
 				{% for eng in user_list %}
 				{% if eng.eng_department == ''%}
+				{% if not eng.eng_active%}
+				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
+					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>  (離職)
+					
+				</a></br>
+				{% else %}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+
+				</a></br>
+				{% endif %}
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -310,7 +449,7 @@
 		</ul>
 	</div>
 
-	<div class="c_ht card-header">TWM Dept.  
+	<!-- <div class="c_ht card-header">TWM Dept.  
 		<ul class="list-group list-group-flush">
 			<div class="card-body">
 			<li class="list-group-item">
@@ -324,7 +463,7 @@
 			</li>
 			</div>
 		</ul>
-	</div>
+	</div> -->
 	
 	<div class="c_ht card-header">TWM ALU Team   
 		<ul class="list-group list-group-flush">
@@ -334,7 +473,7 @@
 				{% if eng.eng_department == 'TWM ALU Team'%}
 				<a href="{% url 'detail' eng.id %}" type="button" class=" bb btn-sm btn-light">
 					{{ eng }} <span class="badge bg-secondary">{{eng.task_set.filter|length}}</span>
-				</a>
+				</a></br>
 				{% endif %}
 				{% endfor %}
 			</li>
@@ -342,7 +481,7 @@
 		</ul>
 	</div>	
 
-	<div class="c_ht card-header">APTG/FET/Enterprise Dept.   
+	<!-- <div class="c_ht card-header">APTG/FET/Enterprise Dept.   
 		<ul class="list-group list-group-flush">
 			<div class="card-body">
 			<li class="list-group-item">
@@ -356,9 +495,9 @@
 			</li>
 			</div>
 		</ul>
-	</div>
+	</div> -->
 
-	<div class="c_ht card-header">ON/CMTS Dept.   
+	<!-- <div class="c_ht card-header">ON/CMTS Dept.   
 		<ul class="list-group list-group-flush">
 			<div class="card-body">
 			<li class="list-group-item">
@@ -372,13 +511,9 @@
 			</li>
 			</div>
 		</ul>
-	</div>
+	</div> -->
 
 </div>	
 
 
 {% endblock content %}
-	{% for eng in user_list %}
-	<a href="{% url 'detail' eng.id %}" class="item">{{ eng }}, </>
-
-	{% endfor %}

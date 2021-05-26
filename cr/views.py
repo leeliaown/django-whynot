@@ -15,6 +15,7 @@ def index(request):
     context = {
 
         'user_list': user_list
+        
 
     }
     return render(request, 'index.html', context)
@@ -85,6 +86,7 @@ def register(request):
 
 def detail(request, user_id):
     user = get_object_or_404(Engineer, pk=user_id)
+
     current_user = request.user.username
     eng = Engineer.objects.get(pk=user_id)
     # eng_count = eng.objects.count()
@@ -130,6 +132,24 @@ def detail(request, user_id):
     #add counting 
     attendance_p = task_date.aggregate(Sum('attendance_point'))
     result_p = task_date.aggregate(Sum('result_point'))
+    rollback_p = task_date.aggregate(Sum('rollback_point'))
+
+    total_p = 0
+
+
+    for k1, v1 in attendance_p.items():
+        for k2, v2 in result_p.items():
+            for k3, v3 in rollback_p.items():
+                if attendance_p[k1] and result_p[k2] and rollback_p[k3] is not None:
+                    total_p = attendance_p[k1]+result_p[k2]+rollback_p[k3]
+
+                else:
+                    attendance_p[k1] = 0
+                    result_p[k2] = 0
+                    rollback_p[k3] = 0
+
+
+    # total_p = attendance_p+result_p+rollback_p
     context = {
 
         'current_user': current_user,
@@ -139,8 +159,9 @@ def detail(request, user_id):
         'myFilter': myFilter,
         'task_date': task_date,
         'caption_text':caption_text,
-        # 'eng_count': eng_count,
-
+        'rollback_p': rollback_p,
+        'total_p': total_p,
+       
 
     }
 

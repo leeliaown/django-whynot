@@ -9,6 +9,8 @@ class Engineer(models.Model):
     eng_department = models.CharField(max_length=100)
     created_date = models.DateField(default=datetime.now)
 
+    eng_active = models.BooleanField()
+
     def __str__(self):
         return f"{self.name}"
         
@@ -24,16 +26,28 @@ class Task(models.Model):
     cr_project_code = models.CharField(max_length=100, blank=True)
     attendance_point = models.SmallIntegerField(
         choices=(
-        (0, "Failed"),
-        (1, "Okay"),
+        (0, "0"),
+        (1, "1"),
     )
     )
     result_point = models.SmallIntegerField(
         choices=(
-        (0, "Failed"),
-        (1, "Okay"),
+        (0, "0"),
+        (1, "1"),
     )   
     )
+
+    rollback_point = models.SmallIntegerField(
+        blank=True,
+        null=True,
+        default=0,
+        choices=(
+        (0, "0"),
+        (1, "1"),
+    )   
+    )
+
+    
 
     remark = models.CharField(max_length=100, blank=True)
 
